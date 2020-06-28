@@ -4,6 +4,7 @@
     <title>Fwitter</title>
   </head>
   <body>
+<<<<<<< HEAD
 
     <div class="container">
       <h1>Welcome to Fwitter!</h1>
@@ -18,4 +19,16 @@
         <a class="button" href="/">Home</a>
     </div>
   </body>
+=======
+    <h2>All Tweets</h2>
+    
+    <h3>Welcome, <%= current_user.username %></h3>
+      <% @tweets.each do |tweet| %>
+        <a href="/tweets/<%= tweet.id %>"><%= tweet.content %></a><br>
+      <% end %>
+      <br>
+      <a class="button" href="/tweets">Tweets</a>
+      <a class="button" href="/">Home</a>
+  </body>  
+>>>>>>> 18c7a54c68ed4edad65d96b7c3eb9743ecc8a080
 </html>

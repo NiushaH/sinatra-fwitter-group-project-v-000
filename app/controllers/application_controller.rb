@@ -66,7 +66,7 @@ class ApplicationController < Sinatra::Base
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to '/tweets'
+      redirect to "/tweets"
     else
       redirect to '/signup'
     end
@@ -93,7 +93,7 @@ class ApplicationController < Sinatra::Base
   #   shows all a single users tweets
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'/users/show' 
+    erb :'/users/index' 
   end 
 
 # index action
