@@ -14,6 +14,27 @@ class ApplicationController < Sinatra::Base
   get '/' do
     erb :index
   end
-end
+
+# Code for Sign Up page here
+
+
+
+# Login code
+  get "/login" do
+    if logged_in?
+			redirect "/tweets"
+		else
+      erb :login
+		end   
+	end
+
+# Logout code
+
+
+
+
+
+# New action code
+
 
 end

@@ -10,4 +10,5 @@ class UsersController < ApplicationController
     erb :'tweets/show'
   end
 
+
 end
