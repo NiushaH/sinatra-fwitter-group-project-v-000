@@ -3,8 +3,6 @@ require './config/environment'
 class ApplicationController < Sinatra::Base
 
   register Sinatra::ActiveRecordExtension
-  set :session_secret, "my_application_secret"
-  set :views, Proc.new { File.join(root, "../views/") }
 
   configure do
     set :public_folder, 'public'
@@ -17,9 +15,40 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  helpers do
+    def logged_in?
+      !!current_user
+    end
+
+    def current_user
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    end
+  end
+
+
 # Code for Sign Up page here
+  get '/signup' do
+    if !logged_in?
+      # display the user signup form
+      erb :'users/create_user'
+    else
+      redirect to '/tweets'
+    end
+  end
 
-
+  post '/signup' do
+    # create the user, save it to database
+    # log the user in
+    # add the user_id to the sessions hash
+    if params[:username] == "" || params[:email] == "" || params[:password] == ""
+      redirect to '/signup'
+    else
+      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/tweets'
+    end
+  end
 
 
 # Login code
@@ -27,11 +56,21 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
     if logged_in?
-			redirect "/tweets"
+			redirect to '/tweets'
 		else
-      erb :login
+      erb :'users/login'
 		end   
 	end
+  
+  post '/login' do
+    user = User.find_by(:username => params[:username])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect to '/tweets'
+    else
+      redirect to '/signup'
+    end
+  end
   
 
 # Logout code
