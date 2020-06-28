@@ -27,10 +27,25 @@ class ApplicationController < Sinatra::Base
       erb :login
 		end   
 	end
+    # does not let user view login page if already logged in (FAILED - 10)
 
 # Logout code
+    # lets a user logout if they are already logged in and redirects to the login page (FAILED - 11)
+    # redirects a user to the index page if the user tries to access /logout while not logged in (FAILED - 12)
+    # redirects a user to the login route if a user tries to access /tweets route if user not logged in (FAILED - 13)
+    # loads /tweets if user is logged in (FAILED - 14)
 
 
+
+# user show page
+  #   shows all a single users tweets (FAILED - 15)
+
+
+# index action
+  #   logged in
+  #     lets a user view the tweets index if logged in (FAILED - 16)
+  #   logged out
+  #     does not let a user view the tweets index if not logged in (FAILED - 17)
 
 
 
