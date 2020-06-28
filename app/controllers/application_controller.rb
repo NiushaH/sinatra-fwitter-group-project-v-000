@@ -35,10 +35,10 @@ class ApplicationController < Sinatra::Base
   
 
 # Logout code
-    # lets a user logout if they are already logged in and redirects to the login page (FAILED - 11)
-    # redirects a user to the index page if the user tries to access /logout while not logged in (FAILED - 12)
-    # redirects a user to the login route if a user tries to access /tweets route if user not logged in (FAILED - 13)
-    # loads /tweets if user is logged in (FAILED - 14)
+    # lets a user logout if they are already logged in and redirects to the login page
+    # redirects a user to the index page if the user tries to access /logout while not logged in
+    # redirects a user to the login route if a user tries to access /tweets route if user not logged in
+    # loads /tweets if user is logged in
 
   get "/logout" do
     if logged_in?
@@ -51,7 +51,7 @@ class ApplicationController < Sinatra::Base
 
 
 # user show page
-  #   shows all a single users tweets (FAILED - 15)
+  #   shows all a single users tweets
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
     erb :'/users/show' 
@@ -59,9 +59,9 @@ class ApplicationController < Sinatra::Base
 
 # index action
   #   logged in
-  #     lets a user view the tweets index if logged in (FAILED - 16)
+  #     lets a user view the tweets index if logged in
   #   logged out
-  #     does not let a user view the tweets index if not logged in (FAILED - 17)
+  #     does not let a user view the tweets index if not logged in
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all
