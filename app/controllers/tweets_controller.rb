@@ -1,5 +1,11 @@
 class TweetsController < ApplicationController
 
+
+# index action
+  #   logged in
+  #     lets a user view the tweets index if logged in
+  #   logged out
+  #     does not let a user view the tweets index if not logged in
   get '/tweets' do
     if logged_in?
       @tweets = Tweet.all
@@ -8,7 +14,6 @@ class TweetsController < ApplicationController
       redirect to '/login'
     end
   end
-
 
 
   post '/tweets' do
