@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-		set :session_secret, "password_security"
+		set :session_secret, "password_digest"
 	end
 
   get '/' do
@@ -16,6 +16,7 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+
     def logged_in?
       !!current_user
     end
@@ -23,10 +24,7 @@ class ApplicationController < Sinatra::Base
     def current_user
       @current_user ||= User.find_by(id: session[:user_id])
     end
-  end
 
-
-# New action code
-
+  end  
 
 end

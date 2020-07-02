@@ -4,9 +4,9 @@ class UsersController < ApplicationController
   get '/signup' do
     if !logged_in?
       # display the user signup form
-      erb :'users/create_user'
+      erb :'/users/signup'
     else
-      redirect to '/tweets'
+      redirect "/tweets"
     end
   end
 
@@ -15,10 +15,11 @@ class UsersController < ApplicationController
     # log the user in
     # add the user_id to the sessions hash
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
-      redirect to '/signup'
+      redirect to '/users/signup'
     else
-      @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
-      @user.save
+      # @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
+      # @user.save
+      @user = User.create(params)
       session[:user_id] = @user.id
       redirect to '/tweets'
     end
@@ -27,22 +28,22 @@ class UsersController < ApplicationController
 
   # Login code
   # does not let user view login page if already logged in (see lines 12 and 13)
-
   get "/login" do
     if logged_in?
-      redirect to '/tweets'
+      redirect "/tweets"
     else
-      erb :'users/login'
+      erb :'/users/login'
     end   
   end
 
   post '/login' do
     user = User.find_by(:username => params[:username])
+    # if user != nil
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect to "/tweets"
+      redirect "/tweets"
     else
-      redirect to '/signup'
+      redirect "/users/signup"
     end
   end
 
@@ -70,16 +71,15 @@ class UsersController < ApplicationController
     erb :'/users/index' 
   end 
 
-  
+
   get '/user' do
     @users = User.all
-    erb:'tweets/index'
+    erb :'/tweets/index'
   end
 
   get '/tweet/:slug' do
     @user = User.find_by_slug(params[:slug])
-    erb :'tweets/show'
+    erb :'/tweets/show'
   end
-
 
 end

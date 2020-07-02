@@ -74,7 +74,7 @@ understand every part of the code.
 │       │   ├── show_tweet.erb
 │       │   └── tweets.erb
 │       └── users
-│           ├── create_user.erb
+│           ├── signup.erb
 │           └── login.erb
 │           └── show.erb
 ├── config
@@ -83,7 +83,7 @@ understand every part of the code.
 ├── db
 │   ├── development.sqlite
 │   ├── migrate
-│   │   ├── 20151124191332_create_users.rb
+│   │   ├── 20151124191332_signups.rb
 │   │   └── 20151124191334_create_tweets.rb
 │   ├── schema.rb
 │   └── test.sqlite
